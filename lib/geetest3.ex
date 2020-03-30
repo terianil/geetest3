@@ -57,7 +57,7 @@ defmodule Geetest3 do
       }
       |> URI.encode_query()
 
-    case get("/validate.php?#{query}") do
+    case post("/validate.php?#{query}", "") do
       {:ok, %Tesla.Env{status: status} = response} when status in 200..299 ->
         {:ok, hash(response.body["seccode"]) == hash(seccode)}
 

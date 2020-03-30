@@ -21,7 +21,8 @@ defmodule Geetest3.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:tesla, "~> 1.3"}
+      {:tesla, "~> 1.3"},
+      {:jason, "~> 1.2"}
     ]
   end
 end

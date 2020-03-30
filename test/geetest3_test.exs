@@ -9,7 +9,7 @@ defmodule Geetest3.Test do
         %Tesla.Env{status: 200, body: %{"challenge" => "test_challenge"}}
 
       %{
-        method: :get,
+        method: :post,
         url:
           "http://api.geetest.com/validate.php?challenge=challenge&json_format=1&seccode=seccode&validate=validate"
       } ->
