@@ -20,7 +20,13 @@ defmodule Geetest3.Test do
   end
 
   test "register success" do
-    assert {:ok, "9f2d9acabc7fe4189eb29561acb6f81f"} = Geetest3.register()
+    assert {:ok,
+            %{
+              challenge: "9f2d9acabc7fe4189eb29561acb6f81f",
+              gt: "test_id",
+              new_captcha: true,
+              offline: false
+            }} = Geetest3.register()
   end
 
   test "validate success" do

@@ -16,7 +16,13 @@ defmodule Geetest3 do
   ## Examples
 
       iex> Geetest3.register()
-      {:ok, "9f2d9acabc7fe4189eb29561acb6f81f"}
+      {:ok,  %{
+          challenge: "9f2d9acabc7fe4189eb29561acb6f81f",
+          gt: "test_id",
+          new_captcha: true,
+          offline: false
+        }
+      }
 
   """
   def register do
@@ -28,7 +34,14 @@ defmodule Geetest3 do
           (response.body["challenge"] <> config[:key])
           |> hash
 
-        {:ok, challenge}
+        response = %{
+          gt: config[:id],
+          challenge: challenge,
+          offline: false,
+          new_captcha: true
+        }
+
+        {:ok, response}
 
       {:ok, %Tesla.Env{} = response} ->
         {:error, response}
