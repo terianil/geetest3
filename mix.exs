@@ -22,7 +22,7 @@ defmodule Geetest3.MixProject do
   defp deps do
     [
       {:tesla, "~> 1.3"},
-      {:jason, "~> 1.2"}
+      {:jason, "~> 1.0"}
     ]
   end
 end
