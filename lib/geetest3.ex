@@ -3,11 +3,6 @@ defmodule Geetest3 do
   Documentation for `Geetest3`.
   """
 
-  use Tesla
-
-  plug(Tesla.Middleware.BaseUrl, "http://api.geetest.com")
-  plug(Tesla.Middleware.JSON)
-
   defp config(), do: Application.fetch_env!(:geetest3, :config)
 
   @doc """
@@ -28,7 +23,7 @@ defmodule Geetest3 do
   def register do
     config = config()
 
-    case get("/register.php?gt=#{config[:id]}&json_format=1") do
+    case Geetest3.Client.get("/register.php?gt=#{config[:id]}&json_format=1") do
       {:ok, %Tesla.Env{status: status} = response} when status in 200..299 ->
         challenge =
           (response.body["challenge"] <> config[:key])
@@ -61,18 +56,9 @@ defmodule Geetest3 do
 
   """
   def validate(challenge, validate, seccode) do
-    query =
-      %{
-        "challenge" => challenge,
-        "validate" => validate,
-        "seccode" => seccode,
-        "json_format" => 1
-      }
-      |> URI.encode_query()
-
-    case post("/validate.php?#{query}", "") do
+    case Geetest3.Client.post("/validate.php?seccode=#{seccode}&challenge=#{challenge}&validate=#{validate}&json_format=1", "") do
       {:ok, %Tesla.Env{status: status} = response} when status in 200..299 ->
-        {:ok, hash(response.body["seccode"]) == hash(seccode)}
+        {:ok, response.body["seccode"] == hash(seccode)}
 
       {:ok, %Tesla.Env{} = response} ->
         {:error, response}

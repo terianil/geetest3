@@ -11,9 +11,9 @@ defmodule Geetest3.Test do
       %{
         method: :post,
         url:
-          "http://api.geetest.com/validate.php?challenge=challenge&json_format=1&seccode=seccode&validate=validate"
+          "http://api.geetest.com/validate.php?seccode=seccode&challenge=challenge&validate=validate&json_format=1"
       } ->
-        %Tesla.Env{status: 200, body: %{"seccode" => "seccode"}}
+        %Tesla.Env{status: 200, body: %{"seccode" => "af3ccef54fa323a4d26ecc1584a18d29"}}
     end)
 
     :ok

@@ -14,7 +14,7 @@ defmodule Geetest3.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger, :ibrowse]
     ]
   end
 
@@ -22,7 +22,8 @@ defmodule Geetest3.MixProject do
   defp deps do
     [
       {:tesla, "~> 1.3"},
-      {:jason, "~> 1.0"}
+      {:jason, "~> 1.0"},
+      {:ibrowse, "~> 4.2"}
     ]
   end
 end
