@@ -5,13 +5,13 @@ defmodule Geetest3.Test do
 
   setup do
     mock(fn
-      %{method: :get, url: "http://api.geetest.com/register.php?gt=test_id&json_format=1"} ->
+      %{method: :get, url: "https://api.geetest.com/register.php?gt=test_id&json_format=1"} ->
         %Tesla.Env{status: 200, body: %{"challenge" => "test_challenge"}}
 
       %{
         method: :post,
         url:
-          "http://api.geetest.com/validate.php?seccode=seccode&challenge=challenge&validate=validate&json_format=1"
+          "https://api.geetest.com/validate.php?seccode=seccode&challenge=challenge&validate=validate&json_format=1"
       } ->
         %Tesla.Env{status: 200, body: %{"seccode" => "af3ccef54fa323a4d26ecc1584a18d29"}}
     end)
