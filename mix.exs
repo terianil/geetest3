@@ -32,7 +32,7 @@ defmodule Geetest3.MixProject do
   end
 
   defp description() do
-    "A simple server side implementation of GeeTest v3 captcha."
+    "A simple Elixir server side implementation of GeeTest v3 captcha."
   end
 
   defp package() do

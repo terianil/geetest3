@@ -1,21 +1,15 @@
 # Geetest3
 
-**TODO: Add description**
+A simple Elixir server side implementation of GeeTest v3 captcha.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `geetest3` to your list of dependencies in `mix.exs`:
+1. Add geetest3 to your `mix.exs` dependencies
 
 ```elixir
-def deps do
-  [
-    {:geetest3, "~> 0.1.0"}
-  ]
-end
+  defp deps do
+    [
+      {:geetest3, "~> 0.1.0"}
+    ]
+  end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/geetest3](https://hexdocs.pm/geetest3).
-
