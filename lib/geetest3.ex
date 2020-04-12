@@ -2,6 +2,7 @@ defmodule Geetest3 do
   @moduledoc """
   Documentation for `Geetest3`.
   """
+  require Logger
 
   defp config(), do: Application.fetch_env!(:geetest3, :config)
 
@@ -20,7 +21,7 @@ defmodule Geetest3 do
       }
 
   """
-  def register do
+  def register() do
     config = config()
 
     case Geetest3.Client.get("/register.php?gt=#{config[:id]}&json_format=1") do
@@ -38,11 +39,21 @@ defmodule Geetest3 do
 
         {:ok, response}
 
-      {:ok, %Tesla.Env{} = response} ->
-        {:error, response}
+      error ->
+        Logger.warn("#{__MODULE__}: register error: #{inspect(error)}")
 
-      {:error, error} ->
-        {:error, error}
+        rnd1 = Enum.random(0..99) |> Integer.to_string() |> hash()
+        rnd2 = Enum.random(0..99) |> Integer.to_string() |> hash() |> String.slice(0, 2)
+        challenge = "#{rnd1}#{rnd2}"
+
+        response = %{
+          gt: config[:id],
+          challenge: challenge,
+          offline: true,
+          new_captcha: true
+        }
+
+        {:ok, response}
     end
   end
 
@@ -66,7 +77,7 @@ defmodule Geetest3 do
       {:ok, %Tesla.Env{} = response} ->
         {:error, response}
 
-      {:error, error} ->
+      {:error, %Tesla.Env{} = error} ->
         {:error, error}
     end
   end
