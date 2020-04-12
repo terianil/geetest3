@@ -56,7 +56,10 @@ defmodule Geetest3 do
 
   """
   def validate(challenge, validate, seccode) do
-    case Geetest3.Client.post("/validate.php?seccode=#{seccode}&challenge=#{challenge}&validate=#{validate}&json_format=1", "") do
+    case Geetest3.Client.post(
+           "/validate.php?seccode=#{seccode}&challenge=#{challenge}&validate=#{validate}&json_format=1",
+           ""
+         ) do
       {:ok, %Tesla.Env{status: status} = response} when status in 200..299 ->
         {:ok, response.body["seccode"] == hash(seccode)}
 
