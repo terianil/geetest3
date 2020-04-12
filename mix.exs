@@ -8,7 +8,9 @@ defmodule Geetest3.MixProject do
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      source_url: "https://github.com/terianil/geetest3"
+      source_url: "https://github.com/terianil/geetest3",
+      description: description(),
+      package: package(),
     ]
   end
 
@@ -24,7 +26,8 @@ defmodule Geetest3.MixProject do
     [
       {:tesla, "~> 1.3"},
       {:jason, "~> 1.0"},
-      {:ibrowse, "~> 4.2"}
+      {:ibrowse, "~> 4.2"},
+      {:ex_doc, ">= 0.0.0", only: :dev},
     ]
   end
 
@@ -35,8 +38,7 @@ defmodule Geetest3.MixProject do
   defp package() do
     [
       name: "geetest3",
-      files: ~w(lib .formatter.exs mix.exs README* readme* LICENSE*
-                license* CHANGELOG* changelog*),
+      files: ~w(lib .formatter.exs mix.exs README* LICENSE*),
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/terianil/geetest3"}
     ]
