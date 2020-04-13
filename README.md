@@ -9,7 +9,7 @@ A simple Elixir server side implementation of GeeTest v3 captcha.
 ```elixir
   defp deps do
     [
-      {:geetest3, "~> 0.1.0"}
+      {:geetest3, "~> 0.2.0"}
     ]
   end
 ```
