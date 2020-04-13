@@ -13,13 +13,12 @@ defmodule Geetest3.FailbackTest do
 
   @tag :capture_log
   test "register failback" do
-    assert {:ok,
-            %{
+    assert %{
               challenge: challenge,
               gt: "test_id",
               new_captcha: true,
               offline: true
-            }} = Geetest3.register()
+            } = Geetest3.register()
 
     assert is_binary(challenge)
     assert String.length(challenge) == 34

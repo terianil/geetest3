@@ -12,15 +12,15 @@ defmodule Geetest3 do
   ## Examples
 
       iex> Geetest3.register()
-      {:ok,  %{
-          challenge: "9f2d9acabc7fe4189eb29561acb6f81f",
-          gt: "test_id",
-          new_captcha: true,
-          offline: false
-        }
+      %{
+        challenge: "9f2d9acabc7fe4189eb29561acb6f81f",
+        gt: "test_id",
+        new_captcha: true,
+        offline: false
       }
 
   """
+  @spec register :: %{challenge: binary, gt: binary, new_captcha: true, offline: boolean}
   def register() do
     config = config()
 
@@ -30,14 +30,12 @@ defmodule Geetest3 do
           (response.body["challenge"] <> config[:key])
           |> hash
 
-        response = %{
+        %{
           gt: config[:id],
           challenge: challenge,
           offline: false,
           new_captcha: true
         }
-
-        {:ok, response}
 
       error ->
         Logger.warn("#{__MODULE__}: register error: #{inspect(error)}")
@@ -46,14 +44,12 @@ defmodule Geetest3 do
         rnd2 = Enum.random(0..99) |> Integer.to_string() |> hash() |> String.slice(0, 2)
         challenge = "#{rnd1}#{rnd2}"
 
-        response = %{
+        %{
           gt: config[:id],
           challenge: challenge,
           offline: true,
           new_captcha: true
         }
-
-        {:ok, response}
     end
   end
 
@@ -66,6 +62,7 @@ defmodule Geetest3 do
       {:ok, true}
 
   """
+  @spec validate(binary, binary, binary) :: {:error, Tesla.Env.t()} | {:ok, boolean}
   def validate(challenge, validate, seccode) do
     case Geetest3.Client.post(
            "/validate.php?seccode=#{seccode}&challenge=#{challenge}&validate=#{validate}&json_format=1",
