@@ -13,3 +13,11 @@ A simple Elixir server side implementation of GeeTest v3 captcha.
     ]
   end
 ```
+
+2. Add geetest3 config
+
+```elixir
+  config :geetest3, :config,
+    id: "GEETEST_ID",
+    key: "GEETEST_KEY"
+```
