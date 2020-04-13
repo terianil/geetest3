@@ -79,6 +79,20 @@ defmodule Geetest3 do
     end
   end
 
+  @doc """
+  Validate failback captcha.
+
+  ## Examples
+
+      iex> Geetest3.validate_failback("challenge", "validate", "seccode")
+      {:ok, false}
+
+  """
+  @spec validate_failback(binary, binary, binary) :: {:ok, boolean}
+  def validate_failback(challenge, validate, _seccode) do
+    {:ok, hash(challenge) == validate}
+  end
+
   defp hash(source) do
     :crypto.hash(:md5, source)
     |> Base.encode16(case: :lower)
