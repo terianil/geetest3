@@ -27,7 +27,8 @@ defmodule Geetest3.MixProject do
       {:tesla, "~> 1.3"},
       {:jason, "~> 1.0"},
       {:ibrowse, "~> 4.2"},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
   end
 
