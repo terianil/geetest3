@@ -21,3 +21,28 @@ A simple Elixir server side implementation of GeeTest v3 captcha.
     id: "GEETEST_ID",
     key: "GEETEST_KEY"
 ```
+
+## Usage
+
+Register a captcha
+```elixir
+  Geetest3.register()
+  %{
+    challenge: "dd290a212412f86b129c622f278c9c11",
+    gt: "test_id",
+    new_captcha: true,
+    offline: false
+  }
+```
+
+Captcha validation
+```elixir
+  Geetest3.validate("challenge", "validate", "seccode")
+  {:ok, true}
+```
+
+Failback captcha validation (for an `offline` challenge)
+```elixir
+  Geetest3.validate_failback("challenge", "validate", "seccode")
+  {:ok, false}
+```
